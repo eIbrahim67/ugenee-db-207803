@@ -22,6 +22,7 @@ namespace NuGeneeAPI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourses(
             [FromQuery] string? search, [FromQuery] int? categoryId, 
             [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
@@ -54,6 +55,7 @@ namespace NuGeneeAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<CourseDto>> GetCourse(int id)
         {
             var course = await _context.Courses

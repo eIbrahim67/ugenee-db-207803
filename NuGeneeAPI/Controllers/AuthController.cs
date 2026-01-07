@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using NuGeneeAPI.Data;
 using NuGeneeAPI.Models.DTOs;
 using NuGeneeAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NuGeneeAPI.Controllers
 {
@@ -20,6 +21,7 @@ namespace NuGeneeAPI.Controllers
         }
 
         [HttpPost("login")]
+        [AllowAnonymous]
         public async Task<ActionResult<string>> Login(LoginDto loginDto)
         {
             var admin = await _context.Admins.FirstOrDefaultAsync(x => x.Email == loginDto.Email);

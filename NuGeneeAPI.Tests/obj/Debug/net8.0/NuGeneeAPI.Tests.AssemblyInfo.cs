@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NuGeneeAPI.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+124d84437c71f7932fa387329a45801a387ca7fe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+49f98186822a72d6279cbcfb16aa38ca6e43e34c")]
 [assembly: System.Reflection.AssemblyProductAttribute("NuGeneeAPI.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NuGeneeAPI.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

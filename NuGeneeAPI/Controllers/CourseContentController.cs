@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,16 @@ namespace NuGeneeAPI.Controllers
 
         // --- Modules ---
 
+        [HttpGet("modules")]
+        [AllowAnonymous]
+        public async Task<ActionResult<IEnumerable<CourseModuleDto>>> GetModules()
+        {
+            var modules = await _context.CourseModules.ToListAsync();
+            return Ok(_mapper.Map<IEnumerable<CourseModuleDto>>(modules));
+        }
+
         [HttpGet("modules/{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<CourseModuleDto>> GetModule(int id)
         {
             var module = await _context.CourseModules
@@ -58,7 +68,16 @@ namespace NuGeneeAPI.Controllers
 
         // --- Lessons ---
 
+        [HttpGet("lessons")]
+        [AllowAnonymous]
+        public async Task<ActionResult<IEnumerable<CourseLessonDto>>> GetLessons()
+        {
+            var lessons = await _context.CourseLessons.ToListAsync();
+            return Ok(_mapper.Map<IEnumerable<CourseLessonDto>>(lessons));
+        }
+
         [HttpGet("lessons/{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<CourseLessonDto>> GetLesson(int id)
         {
             var lesson = await _context.CourseLessons

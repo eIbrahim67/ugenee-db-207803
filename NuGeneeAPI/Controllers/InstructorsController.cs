@@ -22,6 +22,7 @@ namespace NuGeneeAPI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<InstructorDto>>> GetInstructors()
         {
             var instructors = await _context.Instructors.ToListAsync();
@@ -29,6 +30,7 @@ namespace NuGeneeAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<InstructorDto>> GetInstructor(int id)
         {
             var instructor = await _context.Instructors

@@ -1,4 +1,6 @@
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -43,10 +45,30 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-builder.Services.AddControllers()
-    .AddJsonOptions(options => {
-        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
-    });
+// 6. CORS
+builder.Services.AddCors(options =>
+{
+    // Development Policy
+    options.AddPolicy("AllowAll", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+    
+    // Production Policy - RESRICTED to official website
+    options.AddPolicy("ProductionPolicy", policy => 
+        policy.WithOrigins("https://nugenee.vercel.app") 
+              .AllowAnyMethod()
+              .AllowAnyHeader());
+});
+
+builder.Services.AddControllers(options => 
+{
+    // ENFORCE AUTHENTICATION BY DEFAULT
+    var policy = new AuthorizationPolicyBuilder()
+                     .RequireAuthenticatedUser()
+                     .Build();
+    options.Filters.Add(new AuthorizeFilter(policy));
+})
+.AddJsonOptions(options => {
+    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+});
 
 builder.Services.AddEndpointsApiExplorer();
 
@@ -82,18 +104,6 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// 6. CORS
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-    
-    // Production Policy - Should be restricted to your frontend domain
-    options.AddPolicy("ProductionPolicy", policy => 
-        policy.WithOrigins("https://nugenee.vercel.app") // Replace with actual domain
-              .AllowAnyMethod()
-              .AllowAnyHeader());
-});
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -108,7 +118,7 @@ else
     app.UseHsts();
     app.UseCors("ProductionPolicy");
     
-    // Uncomment if you want Swagger in production for testing
+    // Validate functionality
     app.UseSwagger();
     app.UseSwaggerUI();
 }

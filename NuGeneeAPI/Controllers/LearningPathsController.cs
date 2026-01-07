@@ -22,6 +22,7 @@ namespace NuGeneeAPI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<LearningPathDto>>> GetLearningPaths()
         {
             var paths = await _context.LearningPaths
@@ -34,6 +35,7 @@ namespace NuGeneeAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<LearningPathDto>> GetLearningPath(int id)
         {
             var path = await _context.LearningPaths

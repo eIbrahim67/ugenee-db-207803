@@ -25,6 +25,7 @@ namespace NuGeneeAPI.Controllers
         // --- Course Projects ---
 
         [HttpGet("course")]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<CourseProjectDto>>> GetCourseProjects()
         {
             var projects = await _context.CourseProjects.ToListAsync();
@@ -43,6 +44,7 @@ namespace NuGeneeAPI.Controllers
         // --- Learning Path Projects ---
 
         [HttpGet("path")]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<PathProjectDto>>> GetPathProjects()
         {
             var projects = await _context.PathProjects.ToListAsync();
