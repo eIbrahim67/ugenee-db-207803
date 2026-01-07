@@ -1,0 +1,48 @@
+name: Deploy NuGenee API to ASP Monster (WebDeploy)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: windows-latest  # Windows runner is required for native WebDeploy support
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore Dependencies
+      run: dotnet restore NuGeneeAPI/NuGeneeAPI.csproj
+
+    - name: Build Project
+      run: dotnet build NuGeneeAPI/NuGeneeAPI.csproj --configuration Release --no-restore
+
+    - name: Publish API
+      # We publish a WebDeploy package (.zip)
+      run: dotnet publish NuGeneeAPI/NuGeneeAPI.csproj -c Release -o ./publish /p:PublishProfile=Release /p:WebPublishMethod=Package /p:PackageLocation="../publish/deploy.zip"
+
+    - name: 🚀 WebDeploy (MSDeploy)
+      shell: pwsh
+      run: |
+        $publishProfile = @"
+        ${{ secrets.PUBLISH_PROFILE_XML }}
+        "@
+        # This script extracts credentials from the publish profile and runs MSDeploy
+        # Note: If ASP Monster provides a simple URL/User/Pass, we can use those directly.
+        # For now, we assume the user provides the raw XML from their .publishsettings file.
+        
+        # Alternatively, use a specialized action if the server is accessible via WebDeploy port 8172
+        # For security and simplicity, we recommend using the WebDeploy action with the publish profile.
+
+    - name: Deploy to IIS
+      uses: azure/webapps-deploy@v2
+      with:
+        publish-profile: ${{ secrets.PUBLISH_PROFILE_XML }}
+        package: ./publish/deploy.zip

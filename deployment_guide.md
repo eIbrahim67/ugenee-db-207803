@@ -2,15 +2,23 @@
 
 This guide provides steps to deploy the NuGenee API to [ASP Monster](https://www.aspmonster.com/) or similar ASP.NET hosting providers.
 
-## 1. Prepare for Publish
+## 1. Automated Deployment (GitHub WebDeploy) - [RECOMMENDED]
 
-Open your terminal in the project root and run the publish command:
+WebDeploy is faster and more reliable than FTP. 
 
-```powershell
-dotnet publish NuGeneeAPI/NuGeneeAPI.csproj -c Release -o ./publish
-```
+1.  **Download Publish Profile**: 
+    - Log in to your **ASP Monster Control Panel**.
+    - Navigate to your Website/API settings.
+    - Look for a button or link that says **"Download Publish Profile"** or **"WebDeploy Settings"**. This will download a `.publishsettings` file (it's an XML file).
+2.  **Add GitHub Secret**: 
+    - Go to your repository on GitHub.
+    - Click **Settings** > **Secrets and variables** > **Actions**.
+    - Add a new Repository secret named: `PUBLISH_PROFILE_XML`.
+    - Open the downloaded `.publishsettings` file in Notepad, copy everything, and paste it into the GitHub secret value.
+3.  **Push to main**: Once the secret is added, every push to `main` will trigger a WebDeploy automatically.
+    - The workflow file is at `.github/workflows/deploy.yml`.
 
-This will create a `publish` folder containing all the files needed for the server.
+## 2. Manual Publish (Alternative)
 
 ## 2. Configure Production Database
 
