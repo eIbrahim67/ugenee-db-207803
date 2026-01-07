@@ -1,0 +1,6 @@
+@NuGeneeAPI_HostAddress = http://localhost:5134
+
+GET {{NuGeneeAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

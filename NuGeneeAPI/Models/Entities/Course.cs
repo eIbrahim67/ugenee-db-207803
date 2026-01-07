@@ -1,0 +1,73 @@
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace NuGeneeAPI.Models.Entities
+{
+    public class Course
+    {
+        [Key]
+        public int Id { get; set; }
+
+        public string Icon { get; set; } = string.Empty;
+
+        [Required]
+        [MaxLength(200)]
+        public string Title { get; set; } = string.Empty;
+
+        [Required]
+        [MaxLength(200)]
+        public string TitleAr { get; set; } = string.Empty;
+
+        public string Description { get; set; } = string.Empty;
+        public string DescriptionAr { get; set; } = string.Empty;
+
+        public string Overview { get; set; } = string.Empty;
+        public string OverviewAr { get; set; } = string.Empty;
+
+        public string Level { get; set; } = string.Empty;
+        public string LevelAr { get; set; } = string.Empty;
+
+        public string Duration { get; set; } = string.Empty;
+        public string DurationAr { get; set; } = string.Empty;
+
+        public string Schedule { get; set; } = string.Empty;
+        public string ScheduleAr { get; set; } = string.Empty;
+
+        public string Skills { get; set; } = string.Empty;
+        public string SkillsAr { get; set; } = string.Empty;
+
+        public string Prerequisites { get; set; } = string.Empty;
+        public string PrerequisitesAr { get; set; } = string.Empty;
+
+        public string Tools { get; set; } = string.Empty;
+
+        public string Objectives { get; set; } = string.Empty;
+        public string ObjectivesAr { get; set; } = string.Empty;
+
+        public string Certification { get; set; } = string.Empty;
+        public string CertificationAr { get; set; } = string.Empty;
+
+        public string TargetAudience { get; set; } = string.Empty;
+        public string TargetAudienceAr { get; set; } = string.Empty;
+
+        public string Color { get; set; } = string.Empty;
+
+        public bool Active { get; set; } = true;
+
+        // Foreign Keys
+        public int CategoryId { get; set; }
+        public Category Category { get; set; } = null!;
+
+        public int? InstructorId { get; set; }
+        public Instructor? MainInstructor { get; set; }
+
+        // Relationships
+        public ICollection<Instructor> Instructors { get; set; } = new List<Instructor>();
+        public ICollection<PathCourse> PathCourses { get; set; } = new List<PathCourse>();
+        public ICollection<CourseProject> Projects { get; set; } = new List<CourseProject>();
+
+        // Navigation to Content
+        public TableOfContent TableOfContent { get; set; } = null!;
+    }
+}
