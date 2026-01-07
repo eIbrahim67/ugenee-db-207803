@@ -2,5 +2,6 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ActiveDebugProfile>https</ActiveDebugProfile>
+    <NameOfLastUsedPublishProfile>C:\Users\ibrah\Documents\Web\nugenee-db-207803\NuGeneeAPI\Properties\PublishProfiles\site49723-WebDeploy.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
