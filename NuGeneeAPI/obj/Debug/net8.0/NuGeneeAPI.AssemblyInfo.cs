@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NuGeneeAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+49f98186822a72d6279cbcfb16aa38ca6e43e34c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ed4e993e88d068f5c4ade70350d07ef832882a3e")]
 [assembly: System.Reflection.AssemblyProductAttribute("NuGeneeAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NuGeneeAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -140,3 +140,5 @@ C:\Users\ibrah\Documents\Web\nugenee-db-207803\NuGeneeAPI\obj\Release\net8.0\NuG
 C:\Users\ibrah\Documents\Web\nugenee-db-207803\NuGeneeAPI\obj\Release\net8.0\NuGeneeAPI.genruntimeconfig.cache
 C:\Users\ibrah\Documents\Web\nugenee-db-207803\NuGeneeAPI\obj\Release\net8.0\ref\NuGeneeAPI.dll
 C:\Users\ibrah\Documents\Web\nugenee-db-207803\NuGeneeAPI\obj\Release\net8.0\NuGeneeAPI.sourcelink.json
+C:\Users\ibrah\Documents\Web\nugenee-db-207803\NuGeneeAPI\bin\Release\net8.0\NuGeneeAPI.xml
+C:\Users\ibrah\Documents\Web\nugenee-db-207803\NuGeneeAPI\obj\Release\net8.0\NuGeneeAPI.xml

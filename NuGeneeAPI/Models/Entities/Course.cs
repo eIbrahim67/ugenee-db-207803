@@ -34,22 +34,22 @@ namespace NuGeneeAPI.Models.Entities
         public string Schedule { get; set; } = string.Empty;
         public string ScheduleAr { get; set; } = string.Empty;
 
-        public string Skills { get; set; } = string.Empty;
-        public string SkillsAr { get; set; } = string.Empty;
+        public List<string> Skills { get; set; } = new();
+        public List<string> SkillsAr { get; set; } = new();
 
-        public string Prerequisites { get; set; } = string.Empty;
-        public string PrerequisitesAr { get; set; } = string.Empty;
+        public List<string> Prerequisites { get; set; } = new();
+        public List<string> PrerequisitesAr { get; set; } = new();
 
-        public string Tools { get; set; } = string.Empty;
+        public List<string> Tools { get; set; } = new();
 
-        public string Objectives { get; set; } = string.Empty;
-        public string ObjectivesAr { get; set; } = string.Empty;
+        public List<string> Objectives { get; set; } = new();
+        public List<string> ObjectivesAr { get; set; } = new();
 
         public string Certification { get; set; } = string.Empty;
         public string CertificationAr { get; set; } = string.Empty;
 
-        public string TargetAudience { get; set; } = string.Empty;
-        public string TargetAudienceAr { get; set; } = string.Empty;
+        public List<string> TargetAudience { get; set; } = new();
+        public List<string> TargetAudienceAr { get; set; } = new();
 
         public string Color { get; set; } = string.Empty;
 

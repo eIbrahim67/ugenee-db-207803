@@ -24,7 +24,7 @@ namespace NuGeneeAPI.Controllers
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourses(
-            [FromQuery] string? search, [FromQuery] int? categoryId, 
+            [FromQuery] string? search, [FromQuery] int? categoryId, [FromQuery] int? instructorId,
             [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
             var query = _context.Courses
@@ -42,6 +42,11 @@ namespace NuGeneeAPI.Controllers
                 query = query.Where(c => c.CategoryId == categoryId.Value);
             }
 
+            if (instructorId.HasValue)
+            {
+                query = query.Where(c => c.InstructorId == instructorId.Value);
+            }
+
             var totalItems = await query.CountAsync();
             var items = await query
                 .Skip((page - 1) * pageSize)
@@ -56,7 +61,7 @@ namespace NuGeneeAPI.Controllers
 
         [HttpGet("{id}")]
         [AllowAnonymous]
-        public async Task<ActionResult<CourseDto>> GetCourse(int id)
+        public async Task<ActionResult<CourseDetailDto>> GetCourse(int id)
         {
             var course = await _context.Courses
                 .Include(c => c.Category)
@@ -70,7 +75,7 @@ namespace NuGeneeAPI.Controllers
 
             if (course == null) return NotFound();
 
-            return _mapper.Map<CourseDto>(course);
+            return _mapper.Map<CourseDetailDto>(course);
         }
 
         [HttpPost]
@@ -98,7 +103,7 @@ namespace NuGeneeAPI.Controllers
         [Authorize(Roles = "Super Admin,Admin")]
         public async Task<IActionResult> UpdateCourse(int id, CourseDto courseDto)
         {
-            if (id != courseDto.Id) return BadRequest();
+            if (id.ToString() != courseDto.Id) return BadRequest();
 
             var course = await _context.Courses.FindAsync(id);
             if (course == null) return NotFound();
@@ -120,6 +125,34 @@ namespace NuGeneeAPI.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+        [HttpPatch("{id}/status")]
+        [Authorize(Roles = "Super Admin,Admin")]
+        public async Task<IActionResult> UpdateCourseStatus(int id, [FromBody] bool active)
+        {
+            var course = await _context.Courses.FindAsync(id);
+            if (course == null) return NotFound();
+
+            course.Active = active;
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpGet("count")]
+        [AllowAnonymous]
+        public async Task<ActionResult<int>> GetTotalCoursesCount()
+        {
+            var count = await _context.Courses.CountAsync();
+            return Ok(count);
+        }
+
+        [HttpGet("active/count")]
+        [AllowAnonymous]
+        public async Task<ActionResult<int>> GetActiveCoursesCount()
+        {
+            var count = await _context.Courses.Where(c => c.Active).CountAsync();
+            return Ok(count);
         }
     }
 }

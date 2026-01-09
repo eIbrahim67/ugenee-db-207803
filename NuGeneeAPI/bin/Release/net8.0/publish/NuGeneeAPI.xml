@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NuGeneeAPI</name>
+    </assembly>
+    <members>
+        <member name="T:NuGeneeAPI.Models.DTOs.CourseDto">
+            <summary>
+            Data Transfer Object for creating or updating a course.
+            </summary>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.Icon">
+            <example>code</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.Title">
+            <example>Frontend Web Development</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.TitleAr">
+            <example>تطوير الواجهات الأمامية للويب</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.Description">
+            <example>Learn how to build modern, responsive web applications using HTML, CSS, and JavaScript.</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.DescriptionAr">
+            <example>تعلم كيفية بناء تطبيقات ويب حديثة ومتجاوبة باستخدام HTML و CSS و JavaScript.</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.Level">
+            <example>Beginner</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.LevelAr">
+            <example>مبتدئ</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.Duration">
+            <example>12 Weeks</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.DurationAr">
+            <example>12 أسبوع</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.Color">
+            <example>#4F46E5</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.Active">
+            <example>true</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.CategoryId">
+            <example>1</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.InstructorId">
+            <example>1</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.Overview">
+            <example>This course introduces the core concepts of frontend development.</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.OverviewAr">
+            <example>تقدم هذه الدورة المفاهيم الأساسية لتطوير الواجهات الأمامية.</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.Schedule">
+            <example>3 sessions per week</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.ScheduleAr">
+            <example>3 حصص أسبوعيًا</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.Skills">
+            <example>["HTML5", "CSS3", "JavaScript"]</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.SkillsAr">
+            <example>["HTML5", "CSS3", "جافاسكريبت"]</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.Prerequisites">
+            <example>["Basic computer skills"]</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.PrerequisitesAr">
+            <example>["مهارات أساسية في استخدام الحاسوب"]</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.Tools">
+            <example>["VS Code", "Chrome"]</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.Objectives">
+            <example>["Build responsive websites"]</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.ObjectivesAr">
+            <example>["بناء مواقع ويب متجاوبة"]</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.Certification">
+            <example>Certificate of Completion</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.CertificationAr">
+            <example>شهادة إتمام</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.TargetAudience">
+            <example>["Beginners"]</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseDto.TargetAudienceAr">
+            <example>["المبتدئين"]</example>
+        </member>
+        <member name="T:NuGeneeAPI.Models.DTOs.CourseModuleDto">
+            <summary>
+            Data Transfer Object for creating or updating a course module.
+            </summary>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseModuleDto.Order">
+            <example>1</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseModuleDto.Title">
+            <example>Introduction to Web Development</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseModuleDto.TitleAr">
+            <example>مقدمة في تطوير الويب</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseModuleDto.Duration">
+            <example>2 hours</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseModuleDto.TableOfContentId">
+            <example>1</example>
+        </member>
+        <member name="T:NuGeneeAPI.Models.DTOs.CourseLessonDto">
+            <summary>
+            Data Transfer Object for creating or updating a course lesson.
+            </summary>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseLessonDto.Order">
+            <example>1</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseLessonDto.Title">
+            <example>What is HTML?</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseLessonDto.TitleAr">
+            <example>ما هو HTML؟</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseLessonDto.Type">
+            <example>video</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.CourseLessonDto.ModuleId">
+            <example>1</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.LessonResourceDto.Type">
+            <example>pdf</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.LessonResourceDto.Title">
+            <example>Lecture Slides</example>
+        </member>
+        <member name="P:NuGeneeAPI.Models.DTOs.LessonResourceDto.Url">
+            <example>https://example.com/slides.pdf</example>
+        </member>
+    </members>
+</doc>

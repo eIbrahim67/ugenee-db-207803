@@ -66,7 +66,11 @@ namespace NuGeneeAPI.Controllers
         {
             if (id != pathDto.Id) return BadRequest();
 
-            var path = await _context.LearningPaths.FindAsync(id);
+            var path = await _context.LearningPaths
+                .Include(p => p.PathCourses)
+                .Include(p => p.Projects)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
             if (path == null) return NotFound();
 
             _mapper.Map(pathDto, path);

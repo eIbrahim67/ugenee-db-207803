@@ -44,6 +44,7 @@ namespace NuGeneeAPI.Models.Entities
 
         [Required]
         public string Title { get; set; } = string.Empty;
+        public string TitleAr { get; set; } = string.Empty;
 
         public string Type { get; set; } = "video"; // video, article, quiz, etc.
         public string Duration { get; set; } = string.Empty;

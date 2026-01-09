@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using NuGeneeAPI.Models.Entities;
+using System.Text.Json;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace NuGeneeAPI.Data
 {
@@ -22,6 +24,8 @@ namespace NuGeneeAPI.Data
         public DbSet<CourseModule> CourseModules { get; set; }
         public DbSet<CourseLesson> CourseLessons { get; set; }
         public DbSet<LessonResource> LessonResources { get; set; }
+        public DbSet<CourseEnrollmentRequest> CourseEnrollmentRequests { get; set; }
+        public DbSet<LearningPathEnrollmentRequest> LearningPathEnrollmentRequests { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,6 +42,36 @@ namespace NuGeneeAPI.Data
                 .WithMany(cat => cat.Courses)
                 .HasForeignKey(c => c.CategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            // Value Converter for List<string> with fallback for non-JSON data
+            var listConverter = new ValueConverter<List<string>, string>(
+                v => JsonSerializer.Serialize(v, (JsonSerializerOptions)null),
+                v => HandleListDeserialization(v));
+
+            modelBuilder.Entity<Course>()
+                .Property(c => c.Skills).HasConversion(listConverter);
+            modelBuilder.Entity<Course>()
+                .Property(c => c.SkillsAr).HasConversion(listConverter);
+            modelBuilder.Entity<Course>()
+                .Property(c => c.Prerequisites).HasConversion(listConverter);
+            modelBuilder.Entity<Course>()
+                .Property(c => c.PrerequisitesAr).HasConversion(listConverter);
+            modelBuilder.Entity<Course>()
+                .Property(c => c.Tools).HasConversion(listConverter);
+            modelBuilder.Entity<Course>()
+                .Property(c => c.Objectives).HasConversion(listConverter);
+            modelBuilder.Entity<Course>()
+                .Property(c => c.ObjectivesAr).HasConversion(listConverter);
+            modelBuilder.Entity<Course>()
+                .Property(c => c.TargetAudience).HasConversion(listConverter);
+            modelBuilder.Entity<Course>()
+                .Property(c => c.TargetAudienceAr).HasConversion(listConverter);
+
+            // LearningPath List<string> Converters
+            modelBuilder.Entity<LearningPath>()
+                .Property(lp => lp.Outcomes).HasConversion(listConverter);
+            modelBuilder.Entity<LearningPath>()
+                .Property(lp => lp.OutcomesAr).HasConversion(listConverter);
 
             // Course ↔ Instructor (M:N)
             modelBuilder.Entity<Course>()
@@ -115,6 +149,25 @@ namespace NuGeneeAPI.Data
                 .HasOne(sc => sc.LearningPath)
                 .WithMany()
                 .HasForeignKey(sc => sc.LearningPathId);
+
+            // Enrollment Tables (Explicit)
+            modelBuilder.Entity<CourseEnrollmentRequest>().ToTable("CourseEnrollmentRequests");
+            modelBuilder.Entity<LearningPathEnrollmentRequest>().ToTable("LearningPathEnrollmentRequests");
+        }
+        private static List<string> HandleListDeserialization(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value)) return new List<string>();
+            if (!value.TrimStart().StartsWith("[") && !value.TrimStart().StartsWith("{")) 
+                return new List<string> { value }; // Treat as single item if not JSON
+            
+            try 
+            {
+                return JsonSerializer.Deserialize<List<string>>(value, (JsonSerializerOptions)null) ?? new List<string>();
+            }
+            catch 
+            {
+                return new List<string> { value }; // Fallback to raw string as single item
+            }
         }
     }
 }

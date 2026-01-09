@@ -43,7 +43,12 @@ namespace NuGeneeAPI.Controllers
             // Note: In real scenarios, you'd need the password here.
             // For now, we'll assume a default password or handle it via a specialized DTO.
             var admin = _mapper.Map<Admin>(adminDto);
-            admin.PasswordHash = BCrypt.Net.BCrypt.HashPassword("DefaultPassword123!");
+            
+            string passwordToHash = !string.IsNullOrEmpty(adminDto.Password) 
+                ? adminDto.Password 
+                : "DefaultPassword123!";
+
+            admin.PasswordHash = BCrypt.Net.BCrypt.HashPassword(passwordToHash);
             _context.Admins.Add(admin);
             await _context.SaveChangesAsync();
 

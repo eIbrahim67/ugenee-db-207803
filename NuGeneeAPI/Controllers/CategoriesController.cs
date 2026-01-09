@@ -29,6 +29,18 @@ namespace NuGeneeAPI.Controllers
             return Ok(_mapper.Map<IEnumerable<CategoryDto>>(categories));
         }
 
+        [HttpGet("{id}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<CategoryDto>> GetCategoryById(int id)
+        {
+            var category = await _context.Categories.FindAsync(id);
+            
+            if (category == null)
+                return NotFound();
+
+            return Ok(_mapper.Map<CategoryDto>(category));
+        }
+
         [HttpPost]
         [Authorize(Roles = "Super Admin")]
         public async Task<ActionResult<CategoryDto>> CreateCategory(CategoryDto categoryDto)
@@ -38,6 +50,19 @@ namespace NuGeneeAPI.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetCategories), new { id = category.Id }, _mapper.Map<CategoryDto>(category));
+        }
+
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Super Admin")]
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null) return NotFound();
+
+            _context.Categories.Remove(category);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }

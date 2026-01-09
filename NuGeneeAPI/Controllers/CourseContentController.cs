@@ -66,6 +66,17 @@ namespace NuGeneeAPI.Controllers
             return NoContent();
         }
 
+        [HttpDelete("modules/{id}")]
+        [Authorize(Roles = "Super Admin")]
+        public async Task<IActionResult> DeleteModule(int id)
+        {
+            var module = await _context.CourseModules.FindAsync(id);
+            if (module == null) return NotFound();
+            _context.CourseModules.Remove(module);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
         // --- Lessons ---
 
         [HttpGet("lessons")]
@@ -94,6 +105,17 @@ namespace NuGeneeAPI.Controllers
             _context.CourseLessons.Add(lesson);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetLesson), new { id = lesson.Id }, _mapper.Map<CourseLessonDto>(lesson));
+        }
+
+        [HttpDelete("lessons/{id}")]
+        [Authorize(Roles = "Super Admin")]
+        public async Task<IActionResult> DeleteLesson(int id)
+        {
+            var lesson = await _context.CourseLessons.FindAsync(id);
+            if (lesson == null) return NotFound();
+            _context.CourseLessons.Remove(lesson);
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
     }
 }

@@ -51,11 +51,12 @@ builder.Services.AddCors(options =>
     // Development Policy
     options.AddPolicy("AllowAll", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
     
-    // Production Policy - RESRICTED to official website
+    // Production Policy - RESTRICTED to official website
     options.AddPolicy("ProductionPolicy", policy => 
         policy.WithOrigins("https://nugenee.vercel.app") 
               .AllowAnyMethod()
-              .AllowAnyHeader());
+              .AllowAnyHeader()
+              .WithExposedHeaders("X-Total-Count"));
 });
 
 builder.Services.AddControllers(options => 
@@ -102,6 +103,11 @@ builder.Services.AddSwaggerGen(c =>
             new List<string>()
         }
     });
+
+    // Include XML Comments
+    var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
 });
 
 var app = builder.Build();
@@ -136,15 +142,8 @@ using (var scope = app.Services.CreateScope())
     {
         var context = services.GetRequiredService<AppDbContext>();
         
-        // In production, we usually use Migrate() instead of EnsureCreated()
-        // but for initial setup on shared hosting, EnsureCreated is a good failsafe
-        await context.Database.EnsureCreatedAsync();
-        
-        // Only seed if there are no admins
-        if (!await context.Admins.AnyAsync())
-        {
-            await DbSeeder.SeedAsync(context);
-        }
+        // Initialize Database (Robust Check)
+        await DbInitializer.InitializeAsync(context);
     }
     catch (Exception ex)
     {

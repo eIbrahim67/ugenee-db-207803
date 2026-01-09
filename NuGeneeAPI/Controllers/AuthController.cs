@@ -22,7 +22,7 @@ namespace NuGeneeAPI.Controllers
 
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<string>> Login(LoginDto loginDto)
+        public async Task<ActionResult<LoginResponseDto>> Login(LoginDto loginDto)
         {
             var admin = await _context.Admins.FirstOrDefaultAsync(x => x.Email == loginDto.Email);
 
@@ -32,7 +32,14 @@ namespace NuGeneeAPI.Controllers
 
             if (!result) return Unauthorized("Invalid password");
 
-            return _tokenService.CreateToken(admin);
+            return Ok(new LoginResponseDto
+            {
+                Token = _tokenService.CreateToken(admin),
+                Email = admin.Email,
+                Name = admin.Name,
+                NameAr = admin.NameAr,
+                Role = admin.Role
+            });
         }
     }
 
@@ -40,5 +47,14 @@ namespace NuGeneeAPI.Controllers
     {
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
+    }
+
+    public class LoginResponseDto
+    {
+        public string Token { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public string NameAr { get; set; } = string.Empty;
+        public string Role { get; set; } = string.Empty;
     }
 }

@@ -24,11 +24,15 @@ namespace NuGeneeAPI.Models.Entities
         public string GoalAr { get; set; } = string.Empty;
 
         public string Duration { get; set; } = string.Empty;
+        public string DurationAr { get; set; } = string.Empty;
+
         public string Difficulty { get; set; } = string.Empty;
+        public string DifficultyAr { get; set; } = string.Empty;
+
         public string Color { get; set; } = string.Empty;
 
-        public string Outcomes { get; set; } = string.Empty;
-        public string OutcomesAr { get; set; } = string.Empty;
+        public List<string> Outcomes { get; set; } = new();
+        public List<string> OutcomesAr { get; set; } = new();
 
         public bool IsCustomizable { get; set; }
         public bool Featured { get; set; }

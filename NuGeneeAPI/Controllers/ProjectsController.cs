@@ -59,5 +59,29 @@ namespace NuGeneeAPI.Controllers
             await _context.SaveChangesAsync();
             return Ok(_mapper.Map<PathProjectDto>(project));
         }
+
+        [HttpDelete("course/{id}")]
+        [Authorize(Roles = "Super Admin")]
+        public async Task<IActionResult> DeleteCourseProject(int id)
+        {
+            var project = await _context.CourseProjects.FindAsync(id);
+            if (project == null) return NotFound();
+
+            _context.CourseProjects.Remove(project);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("path/{id}")]
+        [Authorize(Roles = "Super Admin")]
+        public async Task<IActionResult> DeletePathProject(int id)
+        {
+            var project = await _context.PathProjects.FindAsync(id);
+            if (project == null) return NotFound();
+
+            _context.PathProjects.Remove(project);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }

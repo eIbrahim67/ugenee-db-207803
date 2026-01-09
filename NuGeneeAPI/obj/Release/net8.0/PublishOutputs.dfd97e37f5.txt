@@ -51,4 +51,5 @@ C:\Users\ibrah\Documents\Web\nugenee-db-207803\NuGeneeAPI\obj\Release\net8.0\Pub
 C:\Users\ibrah\Documents\Web\nugenee-db-207803\NuGeneeAPI\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 C:\Users\ibrah\Documents\Web\nugenee-db-207803\NuGeneeAPI\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\ibrah\Documents\Web\nugenee-db-207803\NuGeneeAPI\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\ibrah\Documents\Web\nugenee-db-207803\NuGeneeAPI\obj\Release\net8.0\PubTmp\Out\NuGeneeAPI.xml
 C:\Users\ibrah\Documents\Web\nugenee-db-207803\NuGeneeAPI\obj\Release\net8.0\PubTmp\Out\NuGeneeAPI.deps.json
